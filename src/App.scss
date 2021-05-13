@@ -1,0 +1,73 @@
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  font-family: 'Inconsolata', 'Helvetica', 'Arial', sans-serif;
+
+  .main-section {
+    align-items: center;
+    background-image: url('./assets/mountains.jpeg');
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+
+    div {
+      animation: slide-down 0.75s ease-out 0.5s both;
+      color: white;
+      cursor: default;
+      margin-left: 10%;
+      position: relative;
+
+      h1 {
+        font-size: 50px;
+      }
+
+      h3 {
+        font-size: 25px;
+
+        @media (min-width: 426px) {
+          font-size: 30px;
+        }
+      }
+
+      a {
+        &:last-of-type {
+          margin-left: 15px;
+        }
+
+        svg {
+          color: white;
+          font-size: 35px;
+
+          &:hover {
+            transform: scale(1.15);
+            transition: transform 0.125s linear;
+          }
+        }
+      }
+
+      svg.arrow-down {
+        cursor: pointer;
+        font-size: 35px;
+      }
+    }
+
+    div * {
+      margin: 10px 0;
+    }
+  }
+}
