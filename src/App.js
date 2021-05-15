@@ -1,33 +1,39 @@
+import React from 'react';
 import './App.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithubSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import { faAngleDoubleDown  } from '@fortawesome/free-solid-svg-icons'
+import { AboutMeSection, MainSection, SkillsSection } from './components';
+
+const OBSERVER_OPTIONS = {
+  rootMargin: '0px 0px -150px',
+  threshold: 0.15,
+};
 
 const App = () => {
+  const aboutMeSectionRef = React.useRef(null);
+  const skillsSectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observerTargets = [aboutMeSectionRef, skillsSectionRef];
+
+    const animateOnScroll = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('animate');
+        observer.unobserve(entry.target)
+      })
+    };
+    const observer = new IntersectionObserver(animateOnScroll, OBSERVER_OPTIONS);
+    observerTargets.forEach((target) => observer.observe(target.current))
+
+    return () => observer.disconnect();
+  }, [])
+
   return (
     <div id="app">
-      <div className='main-section'>
-        <div>
-          <h1>Chong Lei</h1>
-          <h3>
-            Front-end Software Engineer
-            <br />
-            Irvine, CA
-          </h3>
-
-          <a href='https://www.linkedin.com/in/chongklei/' target='_blank'>
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-          <a href='https://github.com/chonglei24' target='_blank'>
-            <FontAwesomeIcon icon={faGithubSquare} />
-          </a>
-
-          <br />
-          <FontAwesomeIcon className='arrow-down' icon={faAngleDoubleDown} />
-        </div>
-      </div>
+      <MainSection ref={{ aboutMeSectionRef, skillsSectionRef }} />
+      <AboutMeSection ref={aboutMeSectionRef} />
+      <SkillsSection ref={skillsSectionRef} />
     </div>
   );
-}
+};
 
 export default App;

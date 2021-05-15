@@ -1,4 +1,16 @@
-@keyframes slide-down {
+@keyframes animate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slide-down-fade-in {
   from {
     opacity: 0;
     transform: translateY(-50px);
@@ -10,27 +22,135 @@
   }
 }
 
+@keyframes slide-up-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+* {
+  font-family: 'Quicksand', 'Helvetica', 'Arial', sans-serif;
+}
+
 body {
   margin: 0;
 }
 
 #app {
-  font-family: 'Inconsolata', 'Helvetica', 'Arial', sans-serif;
+  .about-me-section {
+    padding: 50px 10%;
 
-  .main-section {
+    // for animation
+    opacity: 0;
+    transform: translateY(-50px);
+
+    * {
+      color: #7a7a7a;
+    }
+
+    img {
+      border-radius: 50%;
+      display: block;
+      height: 200px;
+      margin: 0 auto;
+      object-fit: cover;
+      transition: width 0.75s ease-out;
+
+      // for animation
+      width: 0px;
+    }
+
+    h1 {
+      border-bottom: 1px solid lightgray;
+      padding-bottom: 15px;
+      text-align: center;
+    }
+
+    p {
+      font-weight: 600;
+      line-height: 1.5;
+    }
+  }
+
+  .about-me-section.animate {
+    animation: slide-up-fade-in 0.75s ease-out 0.25s both;
+
+    img {
+      width: 200px;
+    }
+  }
+
+  .contact-info-section {
     align-items: center;
-    background-image: url('./assets/mountains.jpeg');
-    background-size: cover;
+    animation: animate-gradient 15s ease infinite;
+    background: linear-gradient(-45deg, #ee7752, #d93f3f, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    color: white;
     display: flex;
-    min-height: 100vh;
+    flex-wrap: wrap;
+    min-height: 110vh;
     width: 100vw;
 
-    div {
-      animation: slide-down 0.75s ease-out 0.5s both;
-      color: white;
+    .content {
+      animation: slide-down-fade-in 0.75s ease-out 0.5s both;
       cursor: default;
       margin-left: 10%;
+      padding-bottom: 10vh;
       position: relative;
+
+      button {
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 10px 0;
+        position: relative;
+        transition: all 0.15s linear;
+        width: 125px;
+
+        &::before {
+          background-color: white;
+          content: '';
+          height: 1px;
+          left: -20px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          transition: all 0.15s linear;
+          width: 40px;
+        }
+
+        &:hover {
+          background-color: white;
+          color: black;
+
+          &::before {
+            opacity: 0;
+            left: 0;
+          }
+        }
+
+        &:last-of-type {
+          margin-left: 50px;
+        }
+      }
 
       h1 {
         font-size: 50px;
@@ -66,8 +186,119 @@ body {
       }
     }
 
-    div * {
-      margin: 10px 0;
+    .triangle-down {
+      border-left: 50vw solid white;
+      border-right: 50vw solid white;
+      border-top: 75px solid transparent;
+      height: 0;
+      width: 0;
+      position: absolute;
+      bottom: calc(-10vh - 10px);
+    }
+  }
+
+  .contact-info-section * {
+    margin: 10px 0;
+  }
+
+  .footer-section {
+    color: white;
+    padding: 50px 0 25px;
+
+    p {
+      font-size: 12px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .home-icon {
+      cursor: pointer;
+      display: block;
+      font-size: 40px;
+      margin: 0 auto;
+    }
+  }
+
+  .skills-section {
+    animation: animate-gradient 15s ease infinite;
+    background: linear-gradient(-45deg, #ee7752, #d93f3f, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    padding: 125px 10% 50px;
+    position: relative;
+
+    h1 {
+      color: white;
+      text-align: center;
+
+      // for animation
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    .icons-container {
+      // for animation
+      opacity: 0;
+
+      .icon-col {
+        padding-bottom: 15px;
+        padding-top: 15px;
+
+        .white-border {
+          border: 1px solid white;
+          border-radius: 50%;
+          height: 100px;
+          margin: 0 auto;
+          position: relative;
+          width: 100px;
+
+          &:hover {
+            img,
+            svg {
+              transform: translate(-50%, -50%) rotateY(360deg);
+            }
+          }
+
+          img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            transition: transform 0.25s ease-in-out;
+          }
+
+          svg {
+            color: white;
+            font-size: 35px;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.25s ease-in-out;
+          }
+        }
+      }
+    }
+
+    .triangle-down {
+      border-left: 50vw solid transparent;
+      border-right: 50vw solid transparent;
+      border-top: 75px solid white;
+      height: 0;
+      width: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .skills-section.animate {
+    h1 {
+      animation: slide-down-fade-in 0.75s ease-out both;
+    }
+
+    .icons-container {
+      animation: fade-in 0.75s ease-out both;
     }
   }
 }
