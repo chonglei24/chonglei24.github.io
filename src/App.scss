@@ -74,9 +74,9 @@ body {
       height: 200px;
       margin: 0 auto;
       object-fit: cover;
-      transition: width 0.75s ease-out;
 
       // for animation
+      transition: width 0.75s ease-out;
       width: 0px;
     }
 
@@ -100,7 +100,7 @@ body {
     }
   }
 
-  .contact-info-section {
+  .main-section {
     align-items: center;
     animation: animate-gradient 15s ease infinite;
     background: linear-gradient(-45deg, #ee7752, #d93f3f, #23a6d5, #23d5ab);
@@ -108,7 +108,8 @@ body {
     color: white;
     display: flex;
     flex-wrap: wrap;
-    min-height: 110vh;
+    min-height: calc(100vh + 75px);
+    position: relative;
     width: 100vw;
 
     .content {
@@ -156,12 +157,18 @@ body {
         }
       }
 
+      div {
+        margin: 10px 0;
+      }
+
       h1 {
         font-size: 50px;
+        margin: 10px 0;
       }
 
       h3 {
         font-size: 25px;
+        margin: 10px 0;
 
         @media (min-width: 426px) {
           font-size: 30px;
@@ -197,12 +204,8 @@ body {
       height: 0;
       width: 0;
       position: absolute;
-      bottom: calc(-10vh - 10px);
+      bottom: 0;
     }
-  }
-
-  .contact-info-section * {
-    margin: 10px 0;
   }
 
   .footer-section {
@@ -298,11 +301,11 @@ body {
 
   .skills-section.animate {
     h1 {
-      animation: slide-down-fade-in 0.75s ease-out both;
+      animation: slide-down-fade-in 0.75s ease-out 0.5s both;
     }
 
     .icons-container {
-      animation: fade-in 0.75s ease-out both;
+      animation: fade-in 0.75s ease-out 0.5s both;
     }
   }
 }
