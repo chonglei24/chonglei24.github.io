@@ -60,6 +60,10 @@ body {
     opacity: 0;
     transform: translateY(-50px);
 
+    @media (min-width: 768px) {
+      padding: 50px 10% 100px;
+    }
+
     * {
       color: #7a7a7a;
     }
